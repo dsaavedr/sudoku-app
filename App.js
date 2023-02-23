@@ -3,7 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { Home } from './src/views';
+import { Home, About } from './src/views';
+import {MAIN_BACKGROUND_COLOR} from './src/constants';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,13 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={Home}
+          options={{
+            headerShown: false
+          }}
+      />
+        <Stack.Screen
+          name="About"
+          component={About}
         />
       </Stack.Navigator>
       <StatusBar style="auto" />
@@ -22,11 +30,6 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#25292e',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: StatusBar.currentHeight || 0,
-  }
+  
 });
+

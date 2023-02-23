@@ -3,7 +3,7 @@ import {Button} from "../components";
 
 import {PRIMARY_COLOR, SECONDARY_COLOR} from "../constants";
 
-export default function MainMenu() {
+export default function MainMenu({navigation}) {
   const onNewGame = () => {
     // TODO
     alert("Pressed new game btn");
@@ -11,7 +11,7 @@ export default function MainMenu() {
 
   const onAbout = () => {
     // TODO
-    alert("Pressed about btn");
+    navigation.navigate('About');
   }
 
   const onOptions = () => {
