@@ -1,3 +1,3 @@
-import MainMenu from "./MainMenu";
+import Home from "./Home";
 
-export {MainMenu};
+export {Home};

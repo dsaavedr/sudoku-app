@@ -51,9 +51,11 @@ export default function MainMenu() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sudoku</Text>
-      <View style={styles.buttonList}>
-        {buttonElements}
+      <View style={styles.container}>
+        <Text style={styles.title}>Sudoku</Text>
+        <View style={styles.buttonList}>
+          {buttonElements}
+        </View>
       </View>
     </View>
   );
@@ -61,6 +63,10 @@ export default function MainMenu() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: '#25292e',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonList: {
     marginTop: 40
