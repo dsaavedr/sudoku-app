@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from "react-native";
-import {Button} from "../components";
+import {Button, Footer} from "../components";
 
 import {PRIMARY_COLOR, SECONDARY_COLOR} from "../constants";
 
@@ -57,6 +57,7 @@ export default function MainMenu({navigation}) {
           {buttonElements}
         </View>
       </View>
+      <Footer />
     </View>
   );
 }
