@@ -1,12 +1,12 @@
 import {StyleSheet, Text, View} from "react-native";
 import {Button, Footer} from "../components";
 
-import {PRIMARY_COLOR, SECONDARY_COLOR} from "../constants";
+import {LIGHT_BACKGROUND_COLOR, PRIMARY_COLOR, SECONDARY_COLOR} from "../constants";
 
 export default function MainMenu({navigation}) {
   const onNewGame = () => {
     // TODO
-    alert("Pressed new game btn");
+    navigation.navigate("Sudoku");
   };
 
   const onAbout = () => {
@@ -22,7 +22,7 @@ export default function MainMenu({navigation}) {
   const buttons = [
     {
       text: 'New Game',
-      background: '#444',
+      background: LIGHT_BACKGROUND_COLOR,
       onPress: onNewGame,
       icon: 'play'
     },
