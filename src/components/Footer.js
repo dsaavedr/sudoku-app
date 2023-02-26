@@ -1,12 +1,13 @@
 import {StyleSheet, View} from "react-native";
 import { Feather, Ionicons } from "@expo/vector-icons";
+import ButtonList from "./ButtonList";
 
 export default function Footer() {
   const iconSize = 30;
   const iconColor = "#fff";
 
   return (
-    <View style={styles.container}>
+    <ButtonList position="absolute"> 
       <Feather
         name="github"
         size={iconSize}
@@ -25,20 +26,11 @@ export default function Footer() {
         color={iconColor}
         style={styles.icon}
       />
-    </View>
+    </ButtonList>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    position: "absolute",
-    bottom: 0,
-    width: 320,
-    paddingVertical: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
   icon: {
     textAlign: "center"
   }
