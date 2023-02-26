@@ -1,4 +1,5 @@
 import {StyleSheet, Text, View} from "react-native";
+import {SECONDARY_COLOR} from "../constants";
 
 export default function Box({data}) {
   // Will expect an array of Points to be passed, with x and y values (absolute or constrained?) and a number value which can be undefined or null.
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap"
   },
   cell: {
-    borderColor: "#fff",
+    borderColor: SECONDARY_COLOR,
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
