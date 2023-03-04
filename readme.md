@@ -4,12 +4,14 @@ The name summs it up well. The point of this project is to create a completely o
 
 ## Contribute
 
-All contributions are welcome!
+All contributions are welcome! Feel free to create a Pull Request or submit an issue.
 
-## Run de project
+## Run the project
 
 - `npm install`
 - `npm start`
+
+This project uses Expo for simplicity. For viewing the app in mobile phones, you can use the Expo Go app. Check out their [docs](https://docs.expo.dev/) for more information.
 
 ## TODOs
 
