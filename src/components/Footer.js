@@ -7,7 +7,7 @@ export default function Footer() {
   const iconColor = "#fff";
 
   return (
-    <ButtonList position="absolute">
+    <ButtonList gapHorizontal={20} position="absolute">
       <Feather
         name="github"
         size={iconSize}
