@@ -2,47 +2,43 @@ import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { BOARD_WIDTH } from "../constants";
 import { Point } from "../utils";
-import Box from "./Box";
+import Cell from "./Cell";
 
 export default function Board() {
-  const [boxes, setBoxes] = useState([]);
-  const [boxesElements, setBoxesElements] = useState([]);
+  const [cells, setCells] = useState([]);
+  const [cellsElements, setCellsElements] = useState([]);
 
   useEffect(() => {
     // Reset state
-    setBoxes([]);
-    setBoxesElements([]);
+    setCells([]);
+    setCellsElements([]);
 
     // Generate set of sample data
-    for (let bx = 0; bx < 3; bx++) {
-      for (let by = 0; by < 3; by++) {
-        // This outer double-loop creates the box
-        const boxPoints = [];
-        for (let x = 0; x < 3; x++) {
-          for (let y = 0; y < 3; y++) {
-            // This inner double-loop creates the cell points for each box
-            boxPoints.push(
-              new Point({
-                x,
-                y,
-                value: 1 + Math.floor(Math.random() * 9),
-              })
-            );
-          }
-        }
+    const cellPoints = [];
+    for (let x = 0; x < 9; x++) {
+      for (let y = 0; y < 9; y++) {
+        cellPoints.push(
+          new Point({
+            x,
+            y,
+            value: 1 + Math.floor(Math.random() * 9),
+          })
+        );
         // Push box array to state
-        setBoxes((current) => [...current, boxPoints]);
       }
     }
+    setCells((current) => [...current, ...cellPoints]);
   }, []);
 
   useEffect(() => {
-    setBoxesElements(() => {
-      return boxes.map((item, idx) => <Box data={item} key={`box-${idx}`} />);
+    setCellsElements(() => {
+      return cells.map((item, idx) => (
+        <Cell point={item} key={`cell-${idx}`} />
+      ));
     });
-  }, [boxes]);
+  }, [cells]);
 
-  return <View style={styles.container}>{boxesElements}</View>;
+  return <View style={styles.container}>{cellsElements}</View>;
 }
 
 const styles = StyleSheet.create({
