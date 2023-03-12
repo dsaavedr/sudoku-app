@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+
 import { BOARD_WIDTH } from "../constants";
 import { Point } from "../utils";
 import Cell from "./Cell";
+import { setCells } from "../state/boardSlice";
 
 export default function Board() {
-  const [cells, setCells] = useState([]);
   const [cellsElements, setCellsElements] = useState([]);
+  const cells = useSelector((state) => state.board.cells);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // Reset state
-    setCells([]);
     setCellsElements([]);
 
     // Generate set of sample data
@@ -21,17 +24,19 @@ export default function Board() {
           new Point({
             x,
             y,
-            value: 1 + Math.floor(Math.random() * 9),
+            value:
+              Math.random() > 0.7 ? 1 + Math.floor(Math.random() * 9) : null,
           })
         );
         // Push box array to state
       }
     }
-    setCells((current) => [...current, ...cellPoints]);
+    dispatch(setCells(cellPoints));
   }, []);
 
   useEffect(() => {
     setCellsElements(() => {
+      if (!cells) return null;
       return cells.map((item, idx) => (
         <Cell point={item} key={`cell-${idx}`} />
       ));
