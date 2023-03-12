@@ -28,7 +28,6 @@ export default function Board() {
               Math.random() > 0.7 ? 1 + Math.floor(Math.random() * 9) : null,
           })
         );
-        // Push box array to state
       }
     }
     dispatch(setCells(cellPoints));
