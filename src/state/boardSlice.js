@@ -8,14 +8,17 @@ export const boardSlice = createSlice({
     cells: [],
   },
   reducers: {
-    update: (state, action) => {
-      const { x, y, cell } = action.payload;
-      const idx = IX(x, y, 9);
+    updateCell: (state, action) => {
+      const { cell } = action.payload;
+      const idx = IX(cell.x, cell.y, 9);
       state.cells[idx] = cell;
+    },
+    setCells: (state, action) => {
+      state.cells = action.payload;
     },
   },
 });
 
-export const { update } = boardSlice.actions;
+export const { updateCell, setCells } = boardSlice.actions;
 
 export default boardSlice.reducer;
