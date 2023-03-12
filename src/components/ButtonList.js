@@ -1,16 +1,17 @@
-import {StyleSheet, View} from "react-native";
+import { StyleSheet, View } from "react-native";
 
-export default function ButtonList({children, style, gapHorizontal = 0, gapVertical = 0}) {
-  const propStyles = {...style}
+export default function ButtonList({
+  children,
+  style,
+  gapHorizontal = 0,
+  gapVertical = 0,
+}) {
+  const propStyles = { ...style };
 
   if (gapHorizontal) propStyles.paddingHorizontal = gapHorizontal / -2;
   if (gapVertical) propStyles.paddingVertical = gapVertical / -2;
 
-  return (
-    <View style={[styles.container, propStyles]}>
-      {children}
-    </View>
-  );
+  return <View style={[styles.container, propStyles]}>{children}</View>;
 }
 
 const styles = StyleSheet.create({
@@ -20,6 +21,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
 });

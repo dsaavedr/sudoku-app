@@ -1,7 +1,7 @@
-import {StyleSheet, Text, View} from "react-native";
-import {SECONDARY_COLOR} from "../constants";
+import { StyleSheet, Text, View } from "react-native";
+import { SECONDARY_COLOR } from "../constants";
 
-export default function Box({data}) {
+export default function Box({ data }) {
   // Will expect an array of Points to be passed, with x and y values (absolute or constrained?) and a number value which can be undefined or null.
   const cells = data.map((item, idx) => (
     <View style={styles.cell} key={`cell-${idx}`}>
@@ -9,11 +9,7 @@ export default function Box({data}) {
     </View>
   ));
 
-  return(
-    <View style={styles.container}>
-      {cells}
-    </View>
-  );
+  return <View style={styles.container}>{cells}</View>;
 }
 
 const styles = StyleSheet.create({
@@ -21,7 +17,7 @@ const styles = StyleSheet.create({
     width: "33%",
     height: "33%",
     flexDirection: "row",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   cell: {
     borderColor: SECONDARY_COLOR,
@@ -33,6 +29,6 @@ const styles = StyleSheet.create({
   },
   cellValue: {
     color: "#fff",
-    fontSize: 24
-  }
+    fontSize: 24,
+  },
 });

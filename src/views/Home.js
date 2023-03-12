@@ -1,9 +1,13 @@
-import {StyleSheet, Text, View} from "react-native";
-import {Button, Footer} from "../components";
+import { StyleSheet, Text, View } from "react-native";
+import { Button, Footer } from "../components";
 
-import {LIGHT_BACKGROUND_COLOR, PRIMARY_COLOR, SECONDARY_COLOR} from "../constants";
+import {
+  LIGHT_BACKGROUND_COLOR,
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+} from "../constants";
 
-export default function MainMenu({navigation}) {
+export default function MainMenu({ navigation }) {
   const onNewGame = () => {
     // TODO
     navigation.navigate("Sudoku");
@@ -11,51 +15,51 @@ export default function MainMenu({navigation}) {
 
   const onAbout = () => {
     // TODO
-    navigation.navigate('About');
-  }
+    navigation.navigate("About");
+  };
 
   const onOptions = () => {
     // TODO
     alert("Pressed options btn");
-  }
+  };
 
   const buttons = [
     {
-      text: 'New Game',
+      text: "New Game",
       background: LIGHT_BACKGROUND_COLOR,
       onPress: onNewGame,
-      icon: 'play'
+      icon: "play",
     },
     {
-      text: 'About',
+      text: "About",
       background: PRIMARY_COLOR,
       onPress: onAbout,
-      icon: 'question'
+      icon: "question",
     },
     {
-      text: 'Options',
+      text: "Options",
       background: SECONDARY_COLOR,
       onPress: onOptions,
-      icon: 'cog'
-    }
+      icon: "cog",
+    },
   ];
 
-  const buttonElements = buttons.map((item, idx) => <Button
-          title={item.text}
-          background={item.background}
-          onPress={item.onPress}
-          style={styles.button}
-          key={idx}
-          icon={item.icon}
-        />);
+  const buttonElements = buttons.map((item, idx) => (
+    <Button
+      title={item.text}
+      background={item.background}
+      onPress={item.onPress}
+      style={styles.button}
+      key={idx}
+      icon={item.icon}
+    />
+  ));
 
   return (
     <View style={styles.container}>
       <View style={styles.container}>
         <Text style={styles.title}>Sudoku</Text>
-        <View style={styles.buttonList}>
-          {buttonElements}
-        </View>
+        <View style={styles.buttonList}>{buttonElements}</View>
       </View>
       <Footer />
     </View>
@@ -65,18 +69,18 @@ export default function MainMenu({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#25292e',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#25292e",
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonList: {
-    marginTop: 40
+    marginTop: 40,
   },
   title: {
     fontSize: 50,
     fontWeight: "bold",
     color: "#fff",
     textAlign: "center",
-    textTransform: 'uppercase',
-  }
+    textTransform: "uppercase",
+  },
 });

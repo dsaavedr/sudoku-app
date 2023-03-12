@@ -1,3 +1,3 @@
 import Point from "./Point";
 
-export {Point};
+export { Point };

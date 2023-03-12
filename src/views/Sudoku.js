@@ -1,6 +1,6 @@
-import {StyleSheet, Text, View} from "react-native";
-import {Board, ButtonList} from "../components";
-import {MAIN_BACKGROUND_COLOR} from "../constants";
+import { StyleSheet, Text, View } from "react-native";
+import { Board, ButtonList } from "../components";
+import { MAIN_BACKGROUND_COLOR } from "../constants";
 
 export default function Game() {
   const inputBtns = [];
@@ -13,11 +13,15 @@ export default function Game() {
     );
   }
 
-  return(
+  return (
     <View style={styles.container}>
       <Text style={styles.title}>New game</Text>
       <Board />
-      <ButtonList gapHorizontal={30} gapVertical={10} style={styles.inputBtnList}>
+      <ButtonList
+        gapHorizontal={30}
+        gapVertical={10}
+        style={styles.inputBtnList}
+      >
         {inputBtns}
       </ButtonList>
     </View>
@@ -29,17 +33,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: MAIN_BACKGROUND_COLOR,
-    paddingTop: 40
+    paddingTop: 40,
   },
   title: {
     fontSize: 30,
     color: "#fff",
-    marginBottom: 50
+    marginBottom: 50,
   },
   inputBtnList: {
     width: 280,
     justifyContent: "center",
-    marginTop: 30
+    marginTop: 30,
   },
   inputBtnContainer: {
     width: 30,
@@ -49,11 +53,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginHorizontal: 15,
-    marginVertical: 5
+    marginVertical: 5,
   },
   inputBtnNumber: {
     fontSize: 24,
     lineHeight: 30,
     fontWeight: "bold",
-  }
+  },
 });

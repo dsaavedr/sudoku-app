@@ -25,6 +25,7 @@ This project uses Expo for simplicity. For viewing the app in mobile phones, you
   - Research algorithm for determining if a board state has a unique solution
 
 ## Mid-term pipeline
+
 - User authentication
 - Completion time
 - Fastest time per difficulty

@@ -1,7 +1,7 @@
-import {useEffect, useState} from "react";
-import {StyleSheet, View} from "react-native";
-import {BOARD_WIDTH} from "../constants";
-import {Point} from "../utils";
+import { useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { BOARD_WIDTH } from "../constants";
+import { Point } from "../utils";
 import Box from "./Box";
 
 export default function Board() {
@@ -21,32 +21,28 @@ export default function Board() {
         for (let x = 0; x < 3; x++) {
           for (let y = 0; y < 3; y++) {
             // This inner double-loop creates the cell points for each box
-            boxPoints.push(new Point({
-              x,
-              y,
-              value: 1 + Math.floor(Math.random() * 9)
-            }));
+            boxPoints.push(
+              new Point({
+                x,
+                y,
+                value: 1 + Math.floor(Math.random() * 9),
+              })
+            );
           }
         }
         // Push box array to state
-        setBoxes(current => [...current, boxPoints]);
+        setBoxes((current) => [...current, boxPoints]);
       }
     }
   }, []);
 
   useEffect(() => {
     setBoxesElements(() => {
-      return boxes.map((item, idx) => (
-        <Box data={item} key={`box-${idx}`} />
-      ));
+      return boxes.map((item, idx) => <Box data={item} key={`box-${idx}`} />);
     });
   }, [boxes]);
 
-  return(
-    <View style={styles.container}> 
-      {boxesElements}
-    </View>
-  );
+  return <View style={styles.container}>{boxesElements}</View>;
 }
 
 const styles = StyleSheet.create({
@@ -54,6 +50,6 @@ const styles = StyleSheet.create({
     width: BOARD_WIDTH,
     height: BOARD_WIDTH,
     flexDirection: "row",
-    flexWrap: "wrap"
-  }
+    flexWrap: "wrap",
+  },
 });
