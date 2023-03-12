@@ -18,8 +18,8 @@ export default function Game() {
       <Text style={styles.title}>New game</Text>
       <Board />
       <ButtonList
-        gapHorizontal={30}
-        gapVertical={10}
+        gapHorizontal={40}
+        gapVertical={20}
         style={styles.inputBtnList}
       >
         {inputBtns}
