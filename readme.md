@@ -8,8 +8,8 @@ All contributions are welcome! Feel free to create a Pull Request or submit an i
 
 ## Run the project
 
-- `npm install`
-- `npm start`
+1. `npm install`
+1. `npm start`
 
 This project uses Expo for simplicity. For viewing the app in mobile phones, you can use the Expo Go app. Check out their [docs](https://docs.expo.dev/) for more information.
 
