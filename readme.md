@@ -15,17 +15,19 @@ This project uses Expo for simplicity. For viewing the app in mobile phones, you
 
 ## TODOs
 
-- Finish implementing the game's data logic
-  - Redux
-  - Decide data structure
-  - Session or more permanent user-side storage?
-- Source games
-  - Can they be randomly generated?
-  - Difficulty categorizations?
-  - Research algorithm for determining if a board state has a unique solution
+-   Finish implementing the game's data logic
+    -   Redux ✅
+    -   Decide data structure: one-dimensional array of Points (see [Point class](src/utils/index.tsx)) ✅
+    -   Session or more permanent user-side storage?
+-   Source games
+    -   Can they be randomly generated?
+    -   Difficulty categorizations?
+    -   Research algorithm for determining if a board state has a unique solution
+    -   Research algorithm for generating solvable boards with various difficulty levels
+-   Implement TypeScript
 
 ## Mid-term pipeline
 
-- User authentication
-- Completion time
-- Fastest time per difficulty
+-   User authentication
+-   Completion time
+-   Fastest time per difficulty
