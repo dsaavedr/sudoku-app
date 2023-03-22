@@ -17,7 +17,7 @@ This project uses Expo for simplicity. For viewing the app in mobile phones, you
 
 -   Finish implementing the game's data logic
     -   Redux ✅
-    -   Decide data structure: one-dimensional array of Points (see [Point class](src/utils/index.tsx)) ✅
+    -   Decide data structure: one-dimensional array of Points (see [Point class](src/utils/index.ts)) ✅
     -   Session or more permanent user-side storage?
 -   Source games
     -   Can they be randomly generated?

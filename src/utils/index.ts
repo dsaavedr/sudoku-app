@@ -1,28 +1,33 @@
-function IX(x, y, w) {
+function IX(x: number, y: number, w: number): number {
   return y * w + x;
 }
 
+type Neighbor = [x: number, y: number];
+
+type PointParams = {
+  x: number;
+  y: number;
+  value?: number;
+  fixed?: boolean;
+}
+
 class Point {
-  constructor({ x = 0, y = 0, value = null, fixed = false }) {
-    this.x = x;
-    this.y = y;
-    this.value_ = value;
-    this.fixed = fixed;
+  x: number;
+  y: number;
+  value?: number;
+  readonly fixed: boolean;
+  private neighbors: Neighbor[];
+
+  constructor(obj: PointParams) {
+    this.x = obj.x;
+    this.y = obj.y;
+    this.value = obj.value;
+    this.fixed = obj.fixed || false;
     this.neighbors = [];
     this.generateNeighbors();
   }
 
-  set value(value) {
-    if (this.fixed) return;
-
-    this.value_ = value;
-  }
-
-  get value() {
-    return this.value_;
-  }
-
-  generateNeighbors() {
+  generateNeighbors(): void {
     // Row and column
     for (let i = 0; i < 9; i++) {
       this.neighbors.push([i, this.y]);
@@ -41,8 +46,8 @@ class Point {
     this.uniqueNeighbors();
   }
 
-  uniqueNeighbors() {
-    const uniqueNeighbors = [];
+  uniqueNeighbors(): void {
+    const uniqueNeighbors: Neighbor[] = [];
     for (const el of this.neighbors) {
       let unique = true;
       for (const uel of uniqueNeighbors) {
@@ -59,7 +64,7 @@ class Point {
   }
 }
 
-function arraysEqual(a, b) {
+function arraysEqual(a: number[], b: number[]): boolean {
   if (a === b) return true;
   if (a == null || b == null) return false;
   if (a.length !== b.length) return false;
@@ -71,15 +76,15 @@ function arraysEqual(a, b) {
   return true;
 }
 
-function generateInitialState() {
+function generateInitialState(): Point[] {
   // Generate set of sample data
-  const cellPoints = [];
+  const cellPoints: Point[] = [];
   for (let x = 0; x < 9; x++) {
     for (let y = 0; y < 9; y++) {
       const point = new Point({
         x,
         y,
-        value: Math.random() > 0.7 ? 1 + Math.floor(Math.random() * 9) : null,
+        value: Math.random() > 0.7 ? 1 + Math.floor(Math.random() * 9) : undefined,
       });
       cellPoints.push(point);
     }
