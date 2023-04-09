@@ -1,3 +1,6 @@
+// Credits to Ross Harrison for most of the logic for generating valid boards
+// https://www.rharriso.com/posts/generating-sudoku-boards-pt-1-structures/#rough-naive-algorithm
+
 function IX(x: number, y: number, w: number): number {
   return y * w + x;
 }
@@ -20,7 +23,7 @@ class Point {
   y: number;
   value?: number;
   readonly fixed: boolean;
-  private neighbors: Neighbor[];
+  neighbors: Neighbor[];
 
   constructor(obj: PointParams) {
     this.x = obj.x;
@@ -64,7 +67,11 @@ class Point {
         uniqueNeighbors.push(el);
       }
     }
-    this.neighbors = uniqueNeighbors;
+
+    // Replace wiyh array of unique neighbors, excluding self
+    this.neighbors = uniqueNeighbors.filter(
+      (el) => !arraysEqual(el, [this.x, this.y])
+    );
   }
 }
 
@@ -83,18 +90,56 @@ function arraysEqual(a: number[], b: number[]): boolean {
 function generateInitialState(): Point[] {
   // Generate set of sample data
   const cellPoints: Point[] = [];
-  for (let x = 0; x < 9; x++) {
-    for (let y = 0; y < 9; y++) {
+  for (let y = 0; y < 9; y++) {
+    for (let x = 0; x < 9; x++) {
       const point = new Point({
         x,
         y,
-        value:
-          Math.random() > 0.7 ? 1 + Math.floor(Math.random() * 9) : undefined,
       });
       cellPoints.push(point);
     }
   }
+
+  fillCells(cellPoints);
+
   return cellPoints;
+}
+
+function fillCells(cells: Point[]): void {
+  for (const cell of cells) {
+    const neighborValues = new Set();
+
+    // Get all unique values in neighbors
+    for (const neighbor of cell.neighbors) {
+      const neighborIdx = IX(...neighbor, 9);
+      neighborValues.add(cells[neighborIdx].value);
+    }
+
+    const validValues = [];
+
+    // Get set of valid values
+    for (let i = 1; i < 10; i++) {
+      if (!neighborValues.has(i)) validValues.push(i);
+    }
+
+    // Randomize choices
+    [cell.value] = shuffleArray(validValues as []);
+  }
+}
+
+// Credits to: https://stackoverflow.com/a/46545530/13530472
+function shuffleArray(array: any[]): any[] {
+  type sortValue = {
+    value: any;
+    sort: number;
+  };
+
+  const result: any[] = array
+    .map((value: any): sortValue => ({ value, sort: Math.random() }))
+    .sort((a: sortValue, b: sortValue): number => a.sort - b.sort)
+    .map(({ value }): any => value);
+
+  return result;
 }
 
 export { Point, generateInitialState, coords, IX, arraysEqual };
