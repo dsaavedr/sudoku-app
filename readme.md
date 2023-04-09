@@ -20,10 +20,15 @@ This project uses Expo for simplicity. For viewing the app in mobile phones, you
     -   Decide data structure: one-dimensional array of Points (see [Point class](src/utils/index.ts)) ✅
     -   Session or more permanent user-side storage?
 -   Source games
-    -   Can they be randomly generated?
-    -   Difficulty categorizations?
+
+    -   Can they be randomly generated? ✅ Implemented a recursive algorithm for generating valid boards.
+    -   Difficulty categorizations? ⚠ For now, I think we'll have the difficulty category be the number of values removed, going back from a solvable board.
     -   Research algorithm for determining if a board state has a unique solution
-    -   Research algorithm for generating solvable boards with various difficulty levels
+
+        The minimun required number of clues for a board to have a unique solution is 17, but this is not a guarantee. See [this SO answer](https://stackoverflow.com/a/7280517/13530472) for a potential algorithm that can be implemented to guarantee uniqueness.
+
+    -   Research algorithm for generating solvable boards with various difficulty levels: ✅
+
 -   Implement TypeScript
 
 ## Mid-term pipeline
