@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { IX, InitialState } from "../utils/";
+import { IX, generateInitialState } from "../utils/";
 
 export const boardSlice = createSlice({
   name: "board",
   initialState: {
-    cells: InitialState,
+    cells: generateInitialState(),
   },
   reducers: {
     updateCell: (state, action) => {

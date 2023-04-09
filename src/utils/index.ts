@@ -2,6 +2,10 @@ function IX(x: number, y: number, w: number): number {
   return y * w + x;
 }
 
+function coords(IX: number, W: number): [number, number] {
+  return [IX % W, Math.floor(IX / W)];
+}
+
 type Neighbor = [x: number, y: number];
 
 type PointParams = {
@@ -9,7 +13,7 @@ type PointParams = {
   y: number;
   value?: number;
   fixed?: boolean;
-}
+};
 
 class Point {
   x: number;
@@ -84,7 +88,8 @@ function generateInitialState(): Point[] {
       const point = new Point({
         x,
         y,
-        value: Math.random() > 0.7 ? 1 + Math.floor(Math.random() * 9) : undefined,
+        value:
+          Math.random() > 0.7 ? 1 + Math.floor(Math.random() * 9) : undefined,
       });
       cellPoints.push(point);
     }
@@ -92,6 +97,4 @@ function generateInitialState(): Point[] {
   return cellPoints;
 }
 
-const InitialState = generateInitialState();
-
-export { Point, InitialState, IX, arraysEqual };
+export { Point, generateInitialState, coords, IX, arraysEqual };
