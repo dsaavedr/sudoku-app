@@ -42,11 +42,11 @@ class Point {
     }
 
     // Block
-    const xb = Math.floor(this.x / 3) * 3;
     const yb = Math.floor(this.y / 3) * 3;
+    const xb = Math.floor(this.x / 3) * 3;
 
-    for (let i = xb; i < xb + 3; i++) {
-      for (let j = yb; j < yb + 3; j++) {
+    for (let j = yb; j < yb + 3; j++) {
+      for (let i = xb; i < xb + 3; i++) {
         this.neighbors.push([i, j]);
       }
     }
@@ -106,25 +106,45 @@ function generateInitialState(): Point[] {
 }
 
 function fillCells(cells: Point[]): void {
-  for (const cell of cells) {
-    const neighborValues = new Set();
+  const remainingCells: Point[] = [...cells];
 
-    // Get all unique values in neighbors
-    for (const neighbor of cell.neighbors) {
-      const neighborIdx = IX(...neighbor, 9);
-      neighborValues.add(cells[neighborIdx].value);
-    }
-
-    const validValues = [];
-
-    // Get set of valid values
-    for (let i = 1; i < 10; i++) {
-      if (!neighborValues.has(i)) validValues.push(i);
-    }
-
-    // Randomize choices
-    [cell.value] = shuffleArray(validValues as []);
+  if (!doFillCells(cells, remainingCells)) {
+    console.error("Unable to fill board");
   }
+}
+
+function doFillCells(cells: Point[], remainingCells: Point[]): boolean {
+  const neighborValues = new Set();
+  let validValues = [];
+
+  // Extract first cell
+  const cell = remainingCells.shift();
+  if (!cell) return false;
+
+  // Get all unique values in neighbors
+  for (const neighbor of cell.neighbors) {
+    const neighborIdx = IX(...neighbor, 9);
+    neighborValues.add(cells[neighborIdx].value);
+  }
+
+  // Get set of valid values
+  for (let i = 1; i < 10; i++) {
+    if (!neighborValues.has(i)) validValues.push(i);
+  }
+  // Shuffle resulting array
+  validValues = shuffleArray(validValues);
+
+  // Recursively do for all other remaining cells, backtrack if no solution is found
+  for (const value of validValues) {
+    cell.value = value;
+
+    if (remainingCells.length === 0) return true;
+    if (doFillCells(cells, remainingCells)) return true;
+  }
+
+  cell.value = undefined;
+  remainingCells.unshift(cell);
+  return false;
 }
 
 // Credits to: https://stackoverflow.com/a/46545530/13530472
