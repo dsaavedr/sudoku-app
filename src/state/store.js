@@ -6,4 +6,8 @@ export default configureStore({
   reducer: {
     board: boardReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
