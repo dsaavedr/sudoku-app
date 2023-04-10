@@ -1,15 +1,34 @@
+import { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Footer } from "../components";
 
 import {
+  DIFFICULTY,
   LIGHT_BACKGROUND_COLOR,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
+  TERTIARY_COLOR,
 } from "../constants";
+import { startNewGame, setGameStarted } from "../state/boardSlice";
+import { generateInitialState } from "../utils";
 
 export default function MainMenu({ navigation }) {
+  const dispatch = useDispatch();
+  const gameStarted = useSelector((state) => state.board.gameStarted);
+
+  useEffect(() => {
+    dispatch(setGameStarted(true));
+  }, []);
+
   const onNewGame = () => {
-    // TODO
+    dispatch(
+      startNewGame({
+        cells: generateInitialState(),
+        difficulty: DIFFICULTY.MEDIUM,
+      })
+    );
+
     navigation.navigate("Sudoku");
   };
 
@@ -23,43 +42,58 @@ export default function MainMenu({ navigation }) {
     alert("Pressed options btn");
   };
 
-  const buttons = [
-    {
-      text: "New Game",
-      background: LIGHT_BACKGROUND_COLOR,
-      onPress: onNewGame,
-      icon: "play",
-    },
-    {
-      text: "About",
-      background: PRIMARY_COLOR,
-      onPress: onAbout,
-      icon: "question",
-    },
-    {
-      text: "Options",
-      background: SECONDARY_COLOR,
-      onPress: onOptions,
-      icon: "cog",
-    },
-  ];
+  const onContinueGame = () => {
+    // TODO
+    navigation.navigate("Sudoku");
+  };
 
-  const buttonElements = buttons.map((item, idx) => (
-    <Button
-      title={item.text}
-      background={item.background}
-      onPress={item.onPress}
-      style={styles.button}
-      key={idx}
-      icon={item.icon}
-    />
-  ));
+  const createButtonElements = () => {
+    const buttons = [
+      {
+        text: "New Game",
+        background: gameStarted ? TERTIARY_COLOR : SECONDARY_COLOR,
+        onPress: onNewGame,
+        icon: gameStarted ? "repeat" : "play",
+      },
+      {
+        text: "About",
+        background: PRIMARY_COLOR,
+        onPress: onAbout,
+        icon: "question",
+      },
+      {
+        text: "Options",
+        background: LIGHT_BACKGROUND_COLOR,
+        onPress: onOptions,
+        icon: "cog",
+      },
+    ];
 
+    if (gameStarted) {
+      buttons.unshift({
+        text: "Continue Game",
+        background: SECONDARY_COLOR,
+        onPress: onContinueGame,
+        icon: "play",
+      });
+    }
+
+    return buttons.map((item, idx) => (
+      <Button
+        title={item.text}
+        background={item.background}
+        onPress={item.onPress}
+        style={styles.button}
+        key={idx}
+        icon={item.icon}
+      />
+    ));
+  };
   return (
     <View style={styles.container}>
       <View style={styles.container}>
         <Text style={styles.title}>Sudoku</Text>
-        <View style={styles.buttonList}>{buttonElements}</View>
+        <View style={styles.buttonList}>{createButtonElements()}</View>
       </View>
       <Footer />
     </View>
