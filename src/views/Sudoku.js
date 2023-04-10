@@ -1,9 +1,18 @@
+import { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { useSelector } from "react-redux";
 import { Board, ButtonList } from "../components";
 import { MAIN_BACKGROUND_COLOR } from "../constants";
 
-export default function Game() {
+export default function Game({ navigation }) {
+  const gameStarted = useSelector((state) => state.board.gameStarted);
   const inputBtns = [];
+
+  useEffect(() => {
+    if (!gameStarted) {
+      navigation.navigate("Home");
+    }
+  }, []);
 
   for (let i = 1; i < 10; i++) {
     inputBtns.push(
