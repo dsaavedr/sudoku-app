@@ -17,10 +17,6 @@ export default function MainMenu({ navigation }) {
   const dispatch = useDispatch();
   const gameStarted = useSelector((state) => state.board.gameStarted);
 
-  useEffect(() => {
-    dispatch(setGameStarted(true));
-  }, []);
-
   const onNewGame = () => {
     dispatch(
       startNewGame({
