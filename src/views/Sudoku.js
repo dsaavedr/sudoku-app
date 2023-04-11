@@ -50,12 +50,12 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   inputBtnList: {
-    width: 280,
+    width: 330,
     justifyContent: "center",
     marginTop: 30,
   },
   inputBtnContainer: {
-    width: 30,
+    width: 40,
     height: 45,
     borderRadius: 15,
     backgroundColor: "#fff",
