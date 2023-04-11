@@ -1,31 +1,28 @@
-import { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
 
 import { BOARD_WIDTH } from "../constants";
 import Cell from "./Cell";
 
 export default function Board() {
-  const [cellsElements, setCellsElements] = useState([]);
-  const cells = useSelector((state) => state.board.cells);
+    const cells = useSelector(state => state.board.cells);
 
-  useEffect(() => {
-    setCellsElements(() => {
-      if (!cells) return null;
-      return cells.map((item, idx) => (
-        <Cell point={item} key={`cell-${idx}`} />
-      ));
-    });
-  }, [cells]);
-
-  return <View style={styles.container}>{cellsElements}</View>;
+    return (
+        <View style={styles.container}>
+            <FlatList
+                data={cells}
+                renderItem={({ item, index }) => {
+                    return <Cell point={item} key={`cell-${index}`} />;
+                }}
+                numColumns={9}
+            />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: BOARD_WIDTH,
-    height: BOARD_WIDTH,
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
+    container: {
+        width: BOARD_WIDTH,
+        height: BOARD_WIDTH
+    }
 });
