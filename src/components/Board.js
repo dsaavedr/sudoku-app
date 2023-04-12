@@ -18,7 +18,6 @@ export default function Board() {
     setSelectedNeighbors(
       cells[selectedCell].neighbors.map((arr) => IX(arr[0], arr[1], 9))
     );
-    console.log(selectedNeighbors);
   }, [selectedCell]);
 
   const onSelectCell = (cell) => {
