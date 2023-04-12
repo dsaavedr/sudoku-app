@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { DIFFICULTY } from "../constants";
-
-import { IX, generateInitialState } from "../utils/";
+import { IX } from "../utils";
 
 const initialState = {
   cells: [],
   gameStarted: false,
   difficulty: null,
+  selectedCell: null,
 };
 
 export const boardSlice = createSlice({
@@ -14,9 +14,15 @@ export const boardSlice = createSlice({
   initialState,
   reducers: {
     updateCell: (state, action) => {
-      const { cell } = action.payload;
-      const idx = IX(cell.x, cell.y, 9);
-      state.cells[idx] = cell;
+      const { idx, data } = action.payload;
+      Object.keys(data).forEach((key) => {
+        state.cells[idx] = data[key];
+      });
+    },
+    selectCell: (state, action) => {
+      const { x, y } = action.payload;
+      const idx = IX(x, y, 9);
+      state.selectedCell = idx;
     },
     setCells: (state, action) => {
       state.cells = action.payload;
@@ -66,6 +72,7 @@ export const boardSlice = createSlice({
 export const {
   updateCell,
   setCells,
+  selectCell,
   setGameStarted,
   setDifficulty,
   startNewGame,
