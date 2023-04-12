@@ -66,6 +66,9 @@ export const boardSlice = createSlice({
           removed++;
         }
       }
+      state.cells.map((cell) => {
+        if (cell.value) cell.fixed = true;
+      });
       state.gameStarted = true;
     },
   },
