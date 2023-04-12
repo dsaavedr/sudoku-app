@@ -15,9 +15,11 @@ export const boardSlice = createSlice({
   reducers: {
     updateCell: (state, action) => {
       const { idx, data } = action.payload;
+      const newCells = [...state.cells];
       Object.keys(data).forEach((key) => {
-        state.cells[idx] = data[key];
+        newCells[idx][key] = data[key];
       });
+      state.cells = newCells;
     },
     selectCell: (state, action) => {
       const { x, y } = action.payload;
