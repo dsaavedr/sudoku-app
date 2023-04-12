@@ -1,24 +1,49 @@
 import { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { useSelector } from "react-redux";
+import { StyleSheet, Text, View, Pressable } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import { Board, ButtonList } from "../components";
 import { MAIN_BACKGROUND_COLOR } from "../constants";
+import { updateCell } from "../state/boardSlice";
 
 export default function Game({ navigation }) {
+  const dispatch = useDispatch();
   const gameStarted = useSelector((state) => state.board.gameStarted);
+  const selectedCell = useSelector((state) => state.board.selectedCell);
+  const cells = useSelector((state) => state.board.cells);
+
   const inputBtns = [];
+
+  const onInput = (number) => {
+    if (!selectedCell) return;
+    const cell = cells[selectedCell];
+    if (cell.fixed) return;
+    dispatch(
+      updateCell({
+        idx: selectedCell,
+        data: {
+          value: number,
+        },
+      })
+    );
+  };
 
   useEffect(() => {
     if (!gameStarted) {
       navigation.navigate("Home");
     }
-  }, []);
+  });
 
   for (let i = 1; i < 10; i++) {
     inputBtns.push(
-      <View key={`input-${i}`} style={styles.inputBtnContainer}>
+      <Pressable
+        key={`input-${i}`}
+        onPress={() => {
+          onInput(i);
+        }}
+        style={styles.inputBtnContainer}
+      >
         <Text style={styles.inputBtnNumber}>{i}</Text>
-      </View>
+      </Pressable>
     );
   }
 
