@@ -1,9 +1,14 @@
-import { StyleSheet, Text, View } from "react-native";
-import { BOARD_WIDTH, SECONDARY_COLOR, TERTIARY_COLOR } from "../constants";
+import { Pressable, StyleSheet, Text } from "react-native";
+import {
+  BOARD_WIDTH,
+  SECONDARY_COLOR,
+  SECONDARY_COLOR_LIGHT,
+} from "../constants";
 
-export default function Cell({ point }) {
+export default function Cell({ point, onPress, selected, neighbor }) {
   const { x, y } = point;
   const cellStyles = { ...styles.cell };
+  const valueStyles = { ...styles.cellValue };
   // Block styles
   if (y % 3 === 0) {
     cellStyles.borderTopColor = "#bbb";
@@ -30,10 +35,18 @@ export default function Cell({ point }) {
     cellStyles.borderBottomColor = "#888";
     cellStyles.borderBottomWidth = 1;
   }
+  if (selected) {
+    cellStyles.backgroundColor = SECONDARY_COLOR;
+    valueStyles.color = "#000";
+  }
+  if (neighbor) {
+    cellStyles.backgroundColor = SECONDARY_COLOR_LIGHT;
+    valueStyles.color = "#000";
+  }
   return (
-    <View style={cellStyles}>
-      <Text style={styles.cellValue}>{point.value}</Text>
-    </View>
+    <Pressable onPress={onPress} style={cellStyles}>
+      <Text style={valueStyles}>{point.value}</Text>
+    </Pressable>
   );
 }
 
