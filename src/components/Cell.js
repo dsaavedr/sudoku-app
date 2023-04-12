@@ -43,6 +43,9 @@ export default function Cell({ point, onPress, selected, neighbor }) {
     cellStyles.backgroundColor = SECONDARY_COLOR_LIGHT;
     valueStyles.color = "#000";
   }
+  if (point.fixed) {
+    valueStyles.fontWeight = "bold";
+  }
   return (
     <Pressable onPress={onPress} style={cellStyles}>
       <Text style={valueStyles}>{point.value}</Text>
