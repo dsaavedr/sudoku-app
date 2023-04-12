@@ -22,7 +22,7 @@ class Point {
   x: number;
   y: number;
   value?: number;
-  readonly fixed: boolean;
+  fixed: boolean;
   neighbors: Neighbor[];
 
   constructor(obj: PointParams) {
