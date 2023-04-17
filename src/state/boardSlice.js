@@ -7,6 +7,7 @@ const initialState = {
   gameStarted: false,
   difficulty: null,
   selectedCell: null,
+  selectedValue: null,
 };
 
 export const boardSlice = createSlice({
@@ -16,15 +17,19 @@ export const boardSlice = createSlice({
     updateCell: (state, action) => {
       const { idx, data } = action.payload;
       const newCells = [...state.cells];
+      if (data.value) {
+        state.selectedValue = data.value;
+      }
       Object.keys(data).forEach((key) => {
         newCells[idx][key] = data[key];
       });
       state.cells = newCells;
     },
     selectCell: (state, action) => {
-      const { x, y } = action.payload;
+      const { x, y, value } = action.payload;
       const idx = IX(x, y, 9);
       state.selectedCell = idx;
+      state.selectedValue = value;
     },
     setCells: (state, action) => {
       state.cells = action.payload;
