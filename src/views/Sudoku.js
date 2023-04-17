@@ -12,7 +12,7 @@ export default function Game({ navigation }) {
   const cells = useSelector((state) => state.board.cells);
 
   const onInput = (number = null) => {
-    if (!selectedCell) return;
+    if (typeof selectedCell !== "number") return;
     const cell = cells[selectedCell];
     if (cell.fixed) return;
     dispatch(
