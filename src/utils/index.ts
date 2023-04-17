@@ -147,6 +147,37 @@ function doFillCells(cells: Point[], remainingCells: Point[]): boolean {
   return false;
 }
 
+type validationResult = {
+  valid: boolean;
+  values: number[] | null;
+};
+
+function validateBoard(cells: Point[]): validationResult {
+  const invalidValues: Set<number> = new Set();
+  const result: validationResult = { valid: false, values: null };
+  let foundEmpty: boolean = false;
+  for (const cell of cells) {
+    if (!cell.value) {
+      foundEmpty = true;
+      continue;
+    }
+    const { neighbors } = cell;
+    for (const el of neighbors) {
+      const idx = IX(...el, 9);
+      const neighbor = cells[idx];
+      if (cell.value && neighbor.value === cell.value) {
+        invalidValues.add(cell.value);
+      }
+    }
+  }
+  if (invalidValues.size > 0 || foundEmpty) {
+    result.values = [...invalidValues];
+    return result;
+  }
+  result.valid = true;
+  return result;
+}
+
 // Credits to: https://stackoverflow.com/a/46545530/13530472
 function shuffleArray(array: any[]): any[] {
   type sortValue = {
@@ -162,4 +193,4 @@ function shuffleArray(array: any[]): any[] {
   return result;
 }
 
-export { Point, generateInitialState, coords, IX, arraysEqual };
+export { Point, generateInitialState, coords, IX, arraysEqual, validateBoard };
