@@ -11,6 +11,7 @@ export default function Board() {
   const dispatch = useDispatch();
   const cells = useSelector((state) => state.board.cells);
   const selectedCell = useSelector((state) => state.board.selectedCell);
+  const selectedValue = useSelector((state) => state.board.selectedValue);
   const [selectedNeighbors, setSelectedNeighbors] = useState([]);
 
   useEffect(() => {
@@ -21,12 +22,7 @@ export default function Board() {
   }, [selectedCell]);
 
   const onSelectCell = (cell) => {
-    dispatch(
-      selectCell({
-        x: cell.x,
-        y: cell.y,
-      })
-    );
+    dispatch(selectCell(cell));
   };
 
   return (
@@ -38,12 +34,14 @@ export default function Board() {
           if (index === selectedCell) {
             selected = true;
           }
+          const isSelectedValue = !selected && item.value === selectedValue;
           return (
             <Cell
               onPress={() => {
                 onSelectCell(item);
               }}
               selected={selected}
+              selectedValue={isSelectedValue}
               neighbor={selectedNeighbors.includes(index)}
               point={item}
               key={`cell-${index}`}
