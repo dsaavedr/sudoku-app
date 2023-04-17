@@ -8,6 +8,7 @@ const initialState = {
   difficulty: null,
   selectedCell: null,
   selectedValue: null,
+  invalidValues: [],
 };
 
 export const boardSlice = createSlice({
@@ -76,6 +77,9 @@ export const boardSlice = createSlice({
       });
       state.gameStarted = true;
     },
+    setInvalidValues: (state, action) => {
+      state.invalidValues = action.payload;
+    },
   },
 });
 
@@ -86,6 +90,7 @@ export const {
   setGameStarted,
   setDifficulty,
   startNewGame,
+  setInvalidValues,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;
