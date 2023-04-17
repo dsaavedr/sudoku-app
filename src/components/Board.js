@@ -12,12 +12,13 @@ export default function Board() {
   const cells = useSelector((state) => state.board.cells);
   const selectedCell = useSelector((state) => state.board.selectedCell);
   const selectedValue = useSelector((state) => state.board.selectedValue);
+  const invalidValues = useSelector((state) => state.board.invalidValues);
   const [selectedNeighbors, setSelectedNeighbors] = useState([]);
 
   useEffect(() => {
-    if (!selectedCell || !cells[selectedCell]) return;
+    if (typeof selectedCell !== "number" || !cells[selectedCell]) return;
     setSelectedNeighbors(
-      cells[selectedCell].neighbors.map((arr) => IX(arr[0], arr[1], 9))
+      cells[selectedCell].neighbors.map((arr) => IX(...arr, 9))
     );
   }, [selectedCell]);
 
@@ -42,6 +43,7 @@ export default function Board() {
               }}
               selected={selected}
               selectedValue={isSelectedValue}
+              valid={!invalidValues?.includes(item.value)}
               neighbor={selectedNeighbors.includes(index)}
               point={item}
               key={`cell-${index}`}

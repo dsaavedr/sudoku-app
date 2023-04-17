@@ -15,6 +15,7 @@ export default function Cell({
   selected,
   selectedValue,
   neighbor,
+  valid,
 }) {
   const { x, y } = point;
   const cellStyles = { ...styles.cell };
@@ -58,6 +59,9 @@ export default function Cell({
   }
   if (point.fixed) {
     valueStyles.fontWeight = "bold";
+  }
+  if (!valid) {
+    valueStyles.color = "red";
   }
   return (
     <Pressable onPress={onPress} style={cellStyles}>
