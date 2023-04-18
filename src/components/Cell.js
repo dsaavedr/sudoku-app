@@ -1,13 +1,13 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import {
   BOARD_WIDTH,
-  PRIMARY_COLOR,
   SECONDARY_COLOR,
   SECONDARY_COLOR_LIGHT,
 } from "../constants";
 
-const borderLight = "#bbb";
+const borderLight = "#ddd";
 const borderDark = "#888";
+const errorColor = "#f00";
 
 export default function Cell({
   point,
@@ -61,7 +61,7 @@ export default function Cell({
     valueStyles.fontWeight = "bold";
   }
   if (!valid) {
-    valueStyles.color = "red";
+    valueStyles.color = errorColor;
   }
   return (
     <Pressable onPress={onPress} style={cellStyles}>
