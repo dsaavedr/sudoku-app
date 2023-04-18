@@ -3,28 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Footer } from "../components";
 
 import {
-  DIFFICULTY,
   LIGHT_BACKGROUND_COLOR,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
   TERTIARY_COLOR,
 } from "../constants";
-import { startNewGame } from "../state/boardSlice";
-import { generateInitialState } from "../utils";
 
 export default function MainMenu({ navigation }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const gameStarted = useSelector((state) => state.board.gameStarted);
 
   const onNewGame = () => {
-    dispatch(
-      startNewGame({
-        cells: generateInitialState(),
-        difficulty: DIFFICULTY.EASY,
-      })
-    );
-
-    navigation.navigate("Sudoku");
+    navigation.navigate("Difficulty");
   };
 
   const onAbout = () => {

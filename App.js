@@ -4,7 +4,7 @@ import { DarkTheme, NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Provider } from "react-redux";
 
-import { Home, About, Sudoku, GameEnded } from "./src/views";
+import { Home, About, Sudoku, GameEnded, DifficultySelect } from "./src/views";
 import { LIGHT_BACKGROUND_COLOR, MAIN_BACKGROUND_COLOR } from "./src/constants";
 import store from "./src/state/store";
 
@@ -48,6 +48,13 @@ export default function App() {
           />
           <Stack.Screen name="Sudoku" component={Sudoku} />
           <Stack.Screen name="About" component={About} />
+          <Stack.Screen
+            name="Difficulty"
+            component={DifficultySelect}
+            options={{
+              headerTitle: "New Game",
+            }}
+          />
           <Stack.Screen
             name="Game Ended"
             component={GameEnded}
