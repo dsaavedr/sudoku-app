@@ -193,4 +193,24 @@ function shuffleArray(array: any[]): any[] {
   return result;
 }
 
-export { Point, generateInitialState, coords, IX, arraysEqual, validateBoard };
+function parseTime(time: number): string {
+  const minutes = Math.floor(time / 60000);
+  let seconds = Math.floor(time / 1000) - minutes * 60;
+
+  const minutesString =
+    String(minutes).length === 1 ? "0" + minutes : String(minutes);
+  const secondsString =
+    String(seconds).length === 1 ? "0" + seconds : String(seconds);
+
+  return `${minutesString}:${secondsString}`;
+}
+
+export {
+  Point,
+  generateInitialState,
+  coords,
+  IX,
+  arraysEqual,
+  validateBoard,
+  parseTime,
+};

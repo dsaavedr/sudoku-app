@@ -12,6 +12,7 @@ const initialState = {
   invalidValues: [],
   completedValues: [],
   startedAt: null,
+  elapsed: 0,
   endedAt: null,
 };
 
@@ -42,6 +43,9 @@ export const boardSlice = createSlice({
     setGameStarted: (state, action) => {
       state.gameStarted = action.payload;
     },
+    timeTick: (state, action) => {
+      state.elapsed += action.payload || 1000;
+    },
     endGame: (state, action) => {
       state.endedAt = Date.now();
       state.gameEnded = true;
@@ -58,6 +62,7 @@ export const boardSlice = createSlice({
       state.invalidValues = [];
       state.completedValues = [];
       state.startedAt = Date.now();
+      state.elapsed = 0;
 
       let numberOfClues;
       switch (state.difficulty) {
@@ -109,6 +114,7 @@ export const {
   startNewGame,
   setInvalidValues,
   setCompletedValues,
+  timeTick,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;
