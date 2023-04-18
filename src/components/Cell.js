@@ -3,7 +3,6 @@ import {
   BOARD_WIDTH,
   SECONDARY_COLOR,
   SECONDARY_COLOR_LIGHT,
-  SUCCESS_LIGHT,
   TERTIARY_COLOR,
 } from "../constants";
 
@@ -18,7 +17,6 @@ export default function Cell({
   selectedValue,
   neighbor,
   valid,
-  completed,
 }) {
   const { x, y } = point;
   const cellStyles = { ...styles.cell };
@@ -65,9 +63,6 @@ export default function Cell({
   }
   if (!valid) {
     valueStyles.color = errorColor;
-  }
-  if (completed) {
-    valueStyles.color = SUCCESS_LIGHT;
   }
   return (
     <Pressable onPress={onPress} style={cellStyles}>

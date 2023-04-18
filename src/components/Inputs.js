@@ -1,20 +1,31 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { useSelector } from "react-redux";
+import { PRIMARY_COLOR, SUCCESS_LIGHT } from "../constants";
+
 import ButtonList from "./ButtonList";
 
 export default function Inputs({ onInput }) {
+  const completedValues = useSelector((state) => state.board.completedValues);
+
   const getInputButtons = () => {
     const inputBtns = [];
     for (let i = 1; i < 10; i++) {
+      const pressableStyles = { ...styles.inputBtnContainer };
+      const textStyles = { ...styles.inputBtnNumber };
+      if (completedValues.includes(i)) {
+        pressableStyles.backgroundColor = PRIMARY_COLOR;
+        textStyles.color = "#fff";
+      }
       inputBtns.push(
         <Pressable
           key={`input-${i}`}
           onPress={() => {
             onInput(i);
           }}
-          style={styles.inputBtnContainer}
+          style={{ ...pressableStyles }}
         >
-          <Text style={styles.inputBtnNumber}>{i}</Text>
+          <Text style={{ ...textStyles }}>{i}</Text>
         </Pressable>
       );
     }

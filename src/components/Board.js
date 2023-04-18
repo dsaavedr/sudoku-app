@@ -13,7 +13,6 @@ export default function Board() {
   const selectedCell = useSelector((state) => state.board.selectedCell);
   const selectedValue = useSelector((state) => state.board.selectedValue);
   const invalidValues = useSelector((state) => state.board.invalidValues);
-  const completedValues = useSelector((state) => state.board.completedValues);
   const [selectedNeighbors, setSelectedNeighbors] = useState([]);
 
   useEffect(() => {
@@ -44,7 +43,6 @@ export default function Board() {
               }}
               selected={selected}
               selectedValue={isSelectedValue}
-              completed={completedValues?.includes(item.value)}
               valid={!invalidValues?.includes(item.value)}
               neighbor={selectedNeighbors.includes(index)}
               point={item}

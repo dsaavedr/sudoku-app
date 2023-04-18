@@ -11,8 +11,8 @@ const initialState = {
   selectedValue: null,
   invalidValues: [],
   completedValues: [],
-  startedAt: 1681833908825,
-  endedAt: 1681833931088,
+  startedAt: null,
+  endedAt: null,
 };
 
 export const boardSlice = createSlice({
