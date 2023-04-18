@@ -1,25 +1,18 @@
 import { View, Text, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import { Button } from "../components";
+import { parseTime } from "../utils";
 
 export default function GameEnded({ navigation }) {
   const difficulty = useSelector((state) => state.board.difficulty);
-  const startedAt = useSelector((state) => state.board.startedAt);
-  const endedAt = useSelector((state) => state.board.endedAt);
-
-  const timeDiff = endedAt - startedAt;
-  const minutes = Math.floor(timeDiff / 60000);
-  const seconds = Math.floor(timeDiff / 1000) - minutes * 60;
+  const elapsed = useSelector((state) => state.board.elapsed);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Congratulations! 🥳</Text>
       <View style={styles.infoContainer}>
         <Text style={styles.info}>Difficulty: {difficulty}</Text>
-        <Text style={styles.info}>
-          Time: {minutes}:
-          {String(seconds).length === 1 ? "0" + seconds : seconds}
-        </Text>
+        <Text style={styles.info}>Time: {parseTime(elapsed)}</Text>
       </View>
       <Button
         title={"Back to main menu"}
