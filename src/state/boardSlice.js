@@ -5,10 +5,13 @@ import { IX } from "../utils";
 const initialState = {
   cells: [],
   gameStarted: false,
+  gameEnded: false,
   difficulty: null,
   selectedCell: null,
   selectedValue: null,
   invalidValues: [],
+  startedAt: 1681833908825,
+  endedAt: 1681833931088,
 };
 
 export const boardSlice = createSlice({
@@ -38,12 +41,20 @@ export const boardSlice = createSlice({
     setGameStarted: (state, action) => {
       state.gameStarted = action.payload;
     },
+    endGame: (state, action) => {
+      state.endedAt = Date.now();
+      state.gameEnded = true;
+      state.gameStarted = false;
+    },
     setDifficulty: (state, action) => {
       state.difficulty = action.payload;
     },
     startNewGame: (state, action) => {
       state.difficulty = action.payload.difficulty;
       state.cells = action.payload.cells || initialState.cells;
+      state.gameStarted = true;
+      state.gameEnded = false;
+      state.startedAt = Date.now();
 
       let numberOfClues;
       switch (state.difficulty) {
@@ -75,7 +86,6 @@ export const boardSlice = createSlice({
       state.cells.map((cell) => {
         if (cell.value) cell.fixed = true;
       });
-      state.gameStarted = true;
     },
     setInvalidValues: (state, action) => {
       state.invalidValues = action.payload;
@@ -88,6 +98,7 @@ export const {
   setCells,
   selectCell,
   setGameStarted,
+  endGame,
   setDifficulty,
   startNewGame,
   setInvalidValues,
