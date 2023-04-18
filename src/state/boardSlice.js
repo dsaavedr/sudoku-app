@@ -10,6 +10,7 @@ const initialState = {
   selectedCell: null,
   selectedValue: null,
   invalidValues: [],
+  completedValues: [],
   startedAt: 1681833908825,
   endedAt: 1681833931088,
 };
@@ -54,6 +55,8 @@ export const boardSlice = createSlice({
       state.cells = action.payload.cells || initialState.cells;
       state.gameStarted = true;
       state.gameEnded = false;
+      state.invalidValues = [];
+      state.completedValues = [];
       state.startedAt = Date.now();
 
       let numberOfClues;
@@ -90,6 +93,9 @@ export const boardSlice = createSlice({
     setInvalidValues: (state, action) => {
       state.invalidValues = action.payload;
     },
+    setCompletedValues: (state, action) => {
+      state.completedValues = action.payload;
+    },
   },
 });
 
@@ -102,6 +108,7 @@ export const {
   setDifficulty,
   startNewGame,
   setInvalidValues,
+  setCompletedValues,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;

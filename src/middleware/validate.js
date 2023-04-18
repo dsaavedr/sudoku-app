@@ -1,4 +1,8 @@
-import { endGame, setInvalidValues } from "../state/boardSlice";
+import {
+  endGame,
+  setInvalidValues,
+  setCompletedValues,
+} from "../state/boardSlice";
 import { validateBoard } from "../utils";
 
 const validate = (store) => (next) => (action) => {
@@ -11,6 +15,25 @@ const validate = (store) => (next) => (action) => {
     return result;
   }
   const { values } = validation;
+  const completedValues = new Set();
+
+  // If the board is not invalid, look for completed values and set them in state
+  if (values.length === 0) {
+    const valuesCount = {};
+    cells.forEach((cell) => {
+      const { value } = cell;
+      if (!value) return;
+      if (!valuesCount[value]) {
+        valuesCount[value] = 1;
+        return;
+      }
+      valuesCount[value]++;
+      if (valuesCount[value] !== 9) return;
+      completedValues.add(value);
+    });
+  }
+
+  store.dispatch(setCompletedValues([...completedValues]));
   store.dispatch(setInvalidValues(values));
   return result;
 };
