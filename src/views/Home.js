@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Footer } from "../components";
@@ -10,7 +9,7 @@ import {
   SECONDARY_COLOR,
   TERTIARY_COLOR,
 } from "../constants";
-import { startNewGame, setGameStarted } from "../state/boardSlice";
+import { startNewGame } from "../state/boardSlice";
 import { generateInitialState } from "../utils";
 
 export default function MainMenu({ navigation }) {
@@ -21,7 +20,7 @@ export default function MainMenu({ navigation }) {
     dispatch(
       startNewGame({
         cells: generateInitialState(),
-        difficulty: DIFFICULTY.MEDIUM,
+        difficulty: DIFFICULTY.EASY,
       })
     );
 
