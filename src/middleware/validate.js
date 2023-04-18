@@ -1,4 +1,4 @@
-import { setInvalidValues } from "../state/boardSlice";
+import { endGame, setInvalidValues } from "../state/boardSlice";
 import { validateBoard } from "../utils";
 
 const validate = (store) => (next) => (action) => {
@@ -6,11 +6,8 @@ const validate = (store) => (next) => (action) => {
   if (action.type !== "board/updateCell") return result;
   const cells = store.getState().board.cells;
   const validation = validateBoard(cells);
-  console.group("validation");
-  console.log(validation);
-  console.groupEnd();
   if (validation.valid) {
-    // TODO: game finished
+    store.dispatch(endGame());
     return result;
   }
   const { values } = validation;
