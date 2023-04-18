@@ -5,13 +5,15 @@ import { PRIMARY_COLOR } from "../constants";
 
 export default function Button({ title, background, onPress, icon }) {
   background = background || PRIMARY_COLOR;
+  const pressableStyles = [styles.button, { backgroundColor: background }];
+
+  if (!icon) {
+    pressableStyles.push({ justifyContent: "center" });
+  }
 
   return (
     <View style={styles.buttonContainer}>
-      <Pressable
-        style={[styles.button, { backgroundColor: background }]}
-        onPress={onPress}
-      >
+      <Pressable onPress={onPress} style={pressableStyles}>
         {icon ? (
           <View style={styles.iconWrapper}>
             <FontAwesome
