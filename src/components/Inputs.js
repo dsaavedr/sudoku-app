@@ -12,10 +12,8 @@ export default function Inputs({ onInput }) {
     const inputBtns = [];
     for (let i = 1; i < 10; i++) {
       const pressableStyles = { ...styles.inputBtnContainer };
-      const textStyles = { ...styles.inputBtnNumber };
       if (completedValues.includes(i)) {
-        pressableStyles.backgroundColor = PRIMARY_COLOR;
-        textStyles.color = "#fff";
+        pressableStyles.backgroundColor = SUCCESS_LIGHT;
       }
       inputBtns.push(
         <Pressable
@@ -25,7 +23,7 @@ export default function Inputs({ onInput }) {
           }}
           style={{ ...pressableStyles }}
         >
-          <Text style={{ ...textStyles }}>{i}</Text>
+          <Text style={styles.inputBtnNumber}>{i}</Text>
         </Pressable>
       );
     }
