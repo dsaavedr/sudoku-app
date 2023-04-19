@@ -13,24 +13,27 @@ export default function Game({ navigation }) {
   const cells = useSelector((state) => state.board.cells);
   const gameEnded = useSelector((state) => state.board.gameEnded);
   const elapsed = useSelector((state) => state.board.elapsed);
+  const [timerInterval, setTimerInterval] = useState(null);
 
   const getTime = () => {
     return parseTime(elapsed);
   };
 
   useEffect(() => {
+    if (timerInterval !== null) return;
     const interval = setInterval(() => dispatch(timeTick()), 1000);
+    setTimerInterval(interval);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   useEffect(() => {
-    if (gameStarted) return;
-    navigation.navigate("Home");
-  });
-
-  useEffect(() => {
     if (!gameEnded) return;
+
+    if (timerInterval) clearInterval(timerInterval);
+
     navigation.navigate("Game Ended");
   }, [gameEnded]);
 
@@ -67,6 +70,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     color: "#fff",
-    marginBottom: 50,
+    marginBottom: 20,
   },
 });
