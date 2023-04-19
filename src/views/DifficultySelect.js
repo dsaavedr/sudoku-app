@@ -58,6 +58,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     textTransform: "uppercase",
-    marginBottom: 80,
+    marginBottom: 40,
   },
 });
