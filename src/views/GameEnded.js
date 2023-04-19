@@ -1,11 +1,18 @@
+import { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../components";
+import { setGameStarted } from "../state/boardSlice";
 import { parseTime } from "../utils";
 
 export default function GameEnded({ navigation }) {
+  const dispatch = useDispatch();
   const difficulty = useSelector((state) => state.board.difficulty);
   const elapsed = useSelector((state) => state.board.elapsed);
+
+  useEffect(() => {
+    dispatch(setGameStarted(false));
+  }, []);
 
   return (
     <View style={styles.container}>
