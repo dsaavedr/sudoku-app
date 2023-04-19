@@ -46,12 +46,14 @@ export default function MainMenu({ navigation }) {
         onPress: onAbout,
         icon: "question",
       },
+      /*
       {
         text: "Options",
         background: LIGHT_BACKGROUND_COLOR,
         onPress: onOptions,
         icon: "cog",
       },
+      */
     ];
 
     if (gameStarted) {
