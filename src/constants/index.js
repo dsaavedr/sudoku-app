@@ -12,3 +12,5 @@ export const DIFFICULTY = {
   HARD: "hard",
   EXTREME: "extreme",
 };
+export const PORTFOLIO_URL = "https://dsaavedr.netlify.app/";
+export const REPO_URL = "https://github.com/dsaavedr/sudoku-app";

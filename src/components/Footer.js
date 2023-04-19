@@ -1,6 +1,7 @@
-import { StyleSheet, View } from "react-native";
+import { Linking, StyleSheet } from "react-native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import ButtonList from "./ButtonList";
+import { REPO_URL } from "../constants";
 
 export default function Footer() {
   const iconSize = 30;
@@ -13,6 +14,7 @@ export default function Footer() {
         size={iconSize}
         color={iconColor}
         style={styles.icon}
+        onPress={() => Linking.openURL(REPO_URL)}
       />
       <Feather
         name="coffee"
@@ -25,6 +27,7 @@ export default function Footer() {
         size={iconSize}
         color={iconColor}
         style={styles.icon}
+        onPress={() => Linking.openURL(REPO_URL + "/issues")}
       />
     </ButtonList>
   );
