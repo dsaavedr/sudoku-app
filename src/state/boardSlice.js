@@ -49,7 +49,6 @@ export const boardSlice = createSlice({
     endGame: (state, action) => {
       state.endedAt = Date.now();
       state.gameEnded = true;
-      state.gameStarted = false;
     },
     setDifficulty: (state, action) => {
       state.difficulty = action.payload;
