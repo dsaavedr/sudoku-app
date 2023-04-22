@@ -3,10 +3,12 @@ import { StyleSheet } from "react-native";
 import { DarkTheme, NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Provider } from "react-redux";
+import * as SplashScreen from "expo-splash-screen";
 
 import { Home, About, Sudoku, GameEnded, DifficultySelect } from "./src/views";
 import { LIGHT_BACKGROUND_COLOR, MAIN_BACKGROUND_COLOR } from "./src/constants";
 import store from "./src/state/store";
+import { useCallback, useEffect, useState } from "react";
 
 const Stack = createStackNavigator();
 
@@ -34,10 +36,38 @@ const navigatorOptions = {
   headerTintColor: "#fff",
 };
 
+// Keep spash screen visible
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        // Mock delay for testing
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) return null;
+
   return (
     <Provider store={store}>
-      <NavigationContainer theme={DarkTheme}>
+      <NavigationContainer theme={DarkTheme} onReady={onLayoutRootView}>
         <Stack.Navigator screenOptions={navigatorOptions}>
           <Stack.Screen
             name="Home"
