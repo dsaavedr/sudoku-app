@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Sudoku",
-    "slug": "sudoku-app",
+    "slug": "SudokuApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/IconKitchen-Output/android/play_store_512.png",
