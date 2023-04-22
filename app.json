@@ -1,29 +1,27 @@
 {
   "expo": {
-    "name": "SudokuApp",
-    "slug": "SudokuApp",
+    "name": "Sudoku",
+    "slug": "sudoku-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/IconKitchen-Output/android/play_store_512.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/IconKitchen-Output/android/res/mipmap-xhdpi/ic_launcher_foreground.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#852064"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/IconKitchen-Output/android/res/mipmap-xhdpi/ic_launcher_foreground.png",
+        "backgroundColor": "#852064"
       },
       "package": "com.danielsaavedram.SudokuApp"
     },
