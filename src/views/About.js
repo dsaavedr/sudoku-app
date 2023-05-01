@@ -8,7 +8,7 @@ export default function About() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Hi There!</Text>
+      <Text style={styles.title}>Hello There!</Text>
       <View style={styles.bodyContainer}>
         <Text style={styles.body}>
           Thank you for downloading the game. This app aims to offer Sudoku,
