@@ -95,7 +95,7 @@ export default function App() {
               }}
             />
           </Stack.Navigator>
-          <StatusBar style="auto" />
+          <StatusBar style="auto" hidden={!appIsReady} />
         </NavigationContainer>
       </PersistGate>
     </Provider>
