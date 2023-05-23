@@ -3,7 +3,7 @@ import {
   BOARD_WIDTH,
   SECONDARY_COLOR,
   SECONDARY_COLOR_LIGHT,
-  TERTIARY_COLOR,
+  TERTIARY_COLOR_LIGHT,
 } from "../constants";
 
 const borderLight = "#ddd";
@@ -48,18 +48,16 @@ export default function Cell({
     cellStyles.borderBottomWidth = 1;
   }
   if (selected) {
-    cellStyles.backgroundColor = SECONDARY_COLOR;
-    valueStyles.color = "#000";
+    cellStyles.backgroundColor = borderDark;
   }
   if (selectedValue && point.value) {
     cellStyles.backgroundColor = borderDark;
   }
   if (neighbor) {
-    cellStyles.backgroundColor = SECONDARY_COLOR_LIGHT;
-    valueStyles.color = "#000";
+    cellStyles.backgroundColor = "#333";
   }
   if (point.fixed) {
-    valueStyles.fontWeight = "bold";
+    valueStyles.color = TERTIARY_COLOR_LIGHT;
   }
   if (!valid) {
     valueStyles.color = errorColor;

@@ -78,7 +78,11 @@ export default function App() {
                 headerShown: false,
               }}
             />
-            <Stack.Screen name="Sudoku" component={Sudoku} />
+            <Stack.Screen
+              name="Sudoku"
+              component={Sudoku}
+              options={{ headerTitle: "Home" }}
+            />
             <Stack.Screen name="About" component={About} />
             <Stack.Screen
               name="Difficulty"
